@@ -6,6 +6,7 @@ import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -16,8 +17,15 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // TODO: Init mMediaPlayer
         mMediaPlayer = MediaPlayer.create(this, R.raw.bensound_buddy);
+
+        mMediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+            @Override
+            public void onCompletion(MediaPlayer mp) {
+                Toast toast = Toast.makeText(getApplicationContext(), "I'm done!", Toast.LENGTH_SHORT);
+                toast.show();
+            }
+        });
 
         setupButtons();
     }
